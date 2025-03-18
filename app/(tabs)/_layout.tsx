@@ -13,8 +13,8 @@ const TabsLayout = () => {
       <TabList className="bg-white shadow-2xl shadow-black px-6 pb-4 flex-row items-center justify-between">
         <TabTrigger name="home" href="/" asChild>
           <TabButton>
-            {({ isFocused }) => (
-              <Button className="gap-3" aspect="plain">
+            {({ isFocused, onPress }) => (
+              <Button className="gap-3" aspect="plain" onPress={onPress}>
                 <Icon path={mdiHomeOutline} priority={isFocused ? 'primary' : 'tabs'} />
 
                 <Label priority={isFocused ? 'primary' : 'tabs'} family="actions" size="xs">
@@ -27,8 +27,8 @@ const TabsLayout = () => {
 
         <TabTrigger name="operations" href="/operations" asChild>
           <TabButton>
-            {({ isFocused }) => (
-              <Button className="gap-3" aspect="plain">
+            {({ isFocused, onPress }) => (
+              <Button className="gap-3" aspect="plain" onPress={onPress}>
                 <Icon path={mdiSwapHorizontal} priority={isFocused ? 'primary' : 'tabs'} />
 
                 <Label priority={isFocused ? 'primary' : 'tabs'} family="actions" size="xs">
@@ -41,8 +41,8 @@ const TabsLayout = () => {
 
         <TabTrigger name="products" href="/products" asChild>
           <TabButton>
-            {({ isFocused }) => (
-              <Button className="gap-3" aspect="plain">
+            {({ isFocused, onPress }) => (
+              <Button className="gap-3" aspect="plain" onPress={onPress}>
                 <Icon path={mdiCreditCardOutline} priority={isFocused ? 'primary' : 'tabs'} />
 
                 <Label priority={isFocused ? 'primary' : 'tabs'} family="actions" size="xs">
