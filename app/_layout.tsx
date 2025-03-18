@@ -38,7 +38,7 @@ const RootLayout = () => {
           headerShown: false,
         }}
       >
-        <Stack.Screen name="index" />
+        <Stack.Screen name="(tabs)" />
         <Stack.Screen name="+not-found" />
       </Stack>
     </SafeAreaProvider>
