@@ -1,12 +1,17 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   // NOTE: Update this to include the paths to all of your component files.
-  content: ['./app/**/*.{js,jsx,ts,tsx}', './shared/**/*.{js,jsx,ts,tsx}'],
+  content: [
+    './app/**/*.{js,jsx,ts,tsx}',
+    './shared/**/*.{js,jsx,ts,tsx}',
+    './modules/**/*.{js,jsx,ts,tsx}',
+  ],
   presets: [require('nativewind/preset')],
   theme: {
     extend: {
       colors: {
         black: 'var(--color-black)',
+        black40: 'var(--color-black-40)',
         white: 'var(--color-white)',
 
         title: 'var(--color-text-title)',
@@ -25,6 +30,7 @@ module.exports = {
         divider: 'var(--color-divider)',
 
         primaryFill: 'var(--color-primary-fill)',
+        primaryFill60: 'var(--color-primary-fill-60)',
         primaryMild: 'var(--color-primary-mild)',
 
         secondaryFill: 'var(--color-secondary-fill)',
@@ -50,7 +56,10 @@ module.exports = {
     ({ addBase }) =>
       addBase({
         ':root': {
+          'font-size': '18px',
+
           '--color-black': '#000000',
+          '--color-black-40': '#00000066',
           '--color-white': '#FFFFFF',
 
           '--color-text-title': '#0D1424',
@@ -69,6 +78,7 @@ module.exports = {
           '--color-actions-disabled': '#EFF2F5',
 
           '--color-primary-fill': '#018765',
+          '--color-primary-fill-60': '#01876599',
           '--color-primary-mild': '#E6F3F0',
 
           '--color-secondary-fill': '#E8781C',

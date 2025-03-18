@@ -1,18 +1,18 @@
 /* native */
 import { View } from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+/* components */
+import { UserHeader } from '@/modules/transactions/components';
 
 const HomeScreen = () => {
-  const insets = useSafeAreaInsets();
-
   return (
     <View
       style={{
         flex: 1,
-        paddingTop: insets.top,
       }}
       className="bg-white"
-    ></View>
+    >
+      <UserHeader />
+    </View>
   );
 };
 
