@@ -56,7 +56,7 @@ module.exports = {
     ({ addBase }) =>
       addBase({
         ':root': {
-          'font-size': '18px',
+          'font-size': '14px',
 
           '--color-black': '#000000',
           '--color-black-40': '#00000066',

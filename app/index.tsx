@@ -1,17 +1,16 @@
 /* native */
 import { View } from 'react-native';
 /* components */
-import { UserHeader } from '@/modules/transactions/components';
+import { QuickOperations, UserHeader } from '@/modules/transactions/components';
 
 const HomeScreen = () => {
   return (
-    <View
-      style={{
-        flex: 1,
-      }}
-      className="bg-white"
-    >
+    <View className="bg-white flex-grow gap-4">
       <UserHeader />
+
+      <View className="px-6 mt-10">
+        <QuickOperations />
+      </View>
     </View>
   );
 };
