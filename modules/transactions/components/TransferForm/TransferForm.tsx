@@ -8,7 +8,7 @@ import { Button, Field, Icon, Label } from '@/shared/components';
 import { mdiPencilOutline } from '@mdi/js';
 
 const TransferForm = () => {
-  const { handleSubmitTransferForm, accountField, amountField, errors, isValid } =
+  const { handleSubmitTransferForm, accountField, amountField, errors, isValid, account } =
     useTransferForm();
 
   return (
@@ -26,22 +26,31 @@ const TransferForm = () => {
           after={accountField.value && <Icon path={mdiPencilOutline} />}
           value={accountField.value?.toString()}
           onChangeText={accountField.onChange}
-          editable={!accountField.disabled}
+          editable={!accountField.disabled && account.balance >= 100}
           error={!!errors.account}
           hint={errors.account?.message}
         />
 
         <Field
           title="¿Cuánto dinero enviarás?"
-          placeholder="C$500"
+          placeholder={`${account.currency} 500`}
           keyboardType="numeric"
           after={amountField.value && <Icon path={mdiPencilOutline} />}
           value={amountField.value?.toString()}
           onChangeText={amountField.onChange}
-          editable={!amountField.disabled}
+          editable={!amountField.disabled && account.balance >= 100}
           error={!!errors.amount}
           hint={errors.amount?.message}
         />
+
+        {account.balance < 100 && (
+          <Label className="self-center text-center" priority="secondary" weight="medium">
+            No cuenta con suficiente saldo para realizar la transferencia, el mínimo es de{' '}
+            <Label priority="secondary" weight="bold">
+              {account.currency} 100.00
+            </Label>
+          </Label>
+        )}
       </View>
 
       <View className="border-t border-disabled px-6 pb-6 pt-4">

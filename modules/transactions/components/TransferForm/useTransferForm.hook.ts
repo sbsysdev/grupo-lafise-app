@@ -1,6 +1,8 @@
 /* native */
 import { useRouter } from 'expo-router';
 import { useController, useForm } from 'react-hook-form';
+/* stores */
+import { accountStore, transactionStore } from '../../stores';
 /* utils */
 import { zodResolver } from '@hookform/resolvers/zod';
 /* validations */
@@ -12,19 +14,25 @@ type TransferForm = {
 };
 
 const useTransferForm = () => {
+  const account = accountStore(state => state.mainAccount);
+  const requestTransaction = transactionStore(state => state.requestTransaction);
+
   const {
     handleSubmit,
     control,
     formState: { errors, isValid },
   } = useForm<TransferForm>({
     mode: 'all',
-    resolver: zodResolver(transferFormValidation('NIO', 100, 7500)),
+    resolver: zodResolver(transferFormValidation(account.currency, 100, account.balance)),
   });
 
   const router = useRouter();
 
   const handleSubmitTransferForm = handleSubmit(data => {
-    console.log(data);
+    requestTransaction(account.accountNumber.toString(), data.account, {
+      currency: account.currency,
+      value: data.amount,
+    });
 
     router.push('/confirm');
   });
@@ -33,7 +41,7 @@ const useTransferForm = () => {
 
   const { field: amountField } = useController({ control, name: 'amount' });
 
-  return { handleSubmitTransferForm, accountField, amountField, errors, isValid };
+  return { handleSubmitTransferForm, accountField, amountField, errors, isValid, account };
 };
 
 export default useTransferForm;

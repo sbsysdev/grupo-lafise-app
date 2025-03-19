@@ -1,11 +1,13 @@
 import { create } from 'zustand';
 /* types */
 import { Account, TransactionItem, UserInfo } from '../types';
+/* repositories */
 import {
   getAccountRepository,
   getAccountTransactionListRepository,
   getUserInfoRepository,
 } from '../repositories';
+/* values */
 import { testUserId } from '../values';
 
 type UserState = 'init' | 'loaded' | 'loading' | 'error';

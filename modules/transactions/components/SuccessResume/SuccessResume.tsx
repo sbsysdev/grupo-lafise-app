@@ -1,15 +1,20 @@
 /* native */
 import { View } from 'react-native';
-import { useRouter } from 'expo-router';
+/* hooks */
+import { useSuccessResume } from './useSuccessResume.hook';
 /* components */
 import { Button, Label } from '@/shared/components';
+/* utils */
+import { format } from 'date-fns';
+import { es } from 'date-fns/locale/es';
 
 const SuccessResume = () => {
-  const router = useRouter();
+  const { transaction, handleReturnHome } = useSuccessResume();
 
-  const handleReturnHome = () => {
-    router.dismissAll();
-  };
+  const numberFormat = new Intl.NumberFormat('en-US', {
+    style: 'decimal',
+    minimumFractionDigits: 2,
+  });
 
   return (
     <View className="flex-grow gap-8">
@@ -18,7 +23,11 @@ const SuccessResume = () => {
           Envío con éxito
         </Label>
 
-        <Label priority="actions">18 de febrero de 2024, 09:30 AM</Label>
+        <Label priority="actions">
+          {format(transaction.transactionDate, "dd 'de' MMMM 'de' yyyy',' hh:mm a", {
+            locale: es,
+          })}
+        </Label>
       </View>
 
       <View className="border-b border-disabled" />
@@ -35,7 +44,7 @@ const SuccessResume = () => {
             </Label>
 
             <Label priority="titleConfirm" size="lg">
-              C$1,000
+              {transaction.amount.currency} {numberFormat.format(transaction.amount.value)}
             </Label>
           </View>
 
@@ -45,7 +54,7 @@ const SuccessResume = () => {
             </Label>
 
             <Label priority="titleConfirm" size="lg">
-              130492890
+              {transaction.destination}
             </Label>
           </View>
 
@@ -55,7 +64,7 @@ const SuccessResume = () => {
             </Label>
 
             <Label priority="titleConfirm" size="lg">
-              0234567645
+              {transaction.origin}
             </Label>
           </View>
         </View>

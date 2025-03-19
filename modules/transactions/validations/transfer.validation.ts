@@ -19,8 +19,8 @@ export const transferAmountValidation = (currency: string, min: number, max: num
       required_error: 'cantidad de dinero es requerido',
       invalid_type_error: 'solo se permiten números',
     })
-    .gte(min, `debe transferir al menos ${currency}${min}`)
-    .lte(max, `puedes transferir asta ${currency}${max}`);
+    .gte(min, `debe transferir al menos ${currency} ${min}`)
+    .lte(max, `puedes transferir asta ${currency} ${max}`);
 
 export const transferFormValidation = (currency: string, min: number, max: number) =>
   z.object({

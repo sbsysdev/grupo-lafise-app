@@ -15,27 +15,3 @@ export interface Account {
   balance: number;
   currency: string;
 }
-
-export interface Amount {
-  currency: string;
-  value: number;
-}
-
-export interface TransactionItem {
-  transactionNumber: string;
-  description: string;
-  bankDescription: string;
-  transactionType: string;
-  amount: Amount;
-  origin: string;
-  destination: string;
-  transactionDate: string;
-}
-
-export interface TransactionRequest {
-  page: number;
-  size: number;
-  next: number;
-  totalCount: number;
-  items: TransactionItem[];
-}

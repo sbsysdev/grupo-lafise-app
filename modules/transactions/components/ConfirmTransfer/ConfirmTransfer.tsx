@@ -1,19 +1,17 @@
 /* native */
-import { View } from 'react-native';
-import { useRouter } from 'expo-router';
+import { ActivityIndicator, View } from 'react-native';
+/* hooks */
+import { useConfirmTransfer } from './useConfirmTransfer.hook';
 /* components */
 import { Button, Icon, Label } from '@/shared/components';
 /* assets */
 import { mdiCellphone } from '@mdi/js';
 
 const ConfirmTransfer = () => {
-  const router = useRouter();
+  const { handleConfirmTransfer, transaction, transactionState, transactionError } =
+    useConfirmTransfer();
 
-  const handleSuccessTransfer = () => {
-    router.dismiss(1);
-
-    router.replace('/success');
-  };
+  const format = new Intl.NumberFormat('en-US', { style: 'decimal', minimumFractionDigits: 2 });
 
   return (
     <View className="gap-12 flex-grow">
@@ -28,7 +26,7 @@ const ConfirmTransfer = () => {
           </Label>
 
           <Label priority="subtitle" weight="semiBold" size="4xl">
-            C$1,000
+            {transaction.amount.currency} {format.format(transaction.amount.value)}
           </Label>
         </View>
       </View>
@@ -40,7 +38,7 @@ const ConfirmTransfer = () => {
           </Label>
 
           <Label priority="mutedConfirm" weight="semiBold">
-            130492890
+            {transaction.destination}
           </Label>
         </View>
 
@@ -50,13 +48,28 @@ const ConfirmTransfer = () => {
           </Label>
 
           <Label priority="mutedConfirm" weight="semiBold">
-            0234567645
+            {transaction.origin}
           </Label>
         </View>
+
+        {transactionState === 'loading' && (
+          <ActivityIndicator className="color-primaryFill mt-4" size="large" />
+        )}
       </View>
 
+      {transactionState === 'error' && (
+        <Label priority="secondary" size="2xl" weight="medium">
+          {transactionError}
+        </Label>
+      )}
+
       <View className="border-t border-disabled px-6 pb-6 pt-4">
-        <Button priority="primary" aspect="fill" onPress={handleSuccessTransfer}>
+        <Button
+          priority="primary"
+          aspect="fill"
+          onPress={handleConfirmTransfer}
+          disabled={transactionState === 'loading'}
+        >
           <Label priority="white" weight="bold" size="lg">
             Confirmar el envío
           </Label>
