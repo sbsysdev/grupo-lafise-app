@@ -30,6 +30,7 @@ module.exports = {
         divider: 'var(--color-divider)',
 
         primaryFill: 'var(--color-primary-fill)',
+        primaryFillVariant: 'var(--color-primary-fill-variant)',
         primaryFill60: 'var(--color-primary-fill-60)',
         primaryMild: 'var(--color-primary-mild)',
 
@@ -78,6 +79,7 @@ module.exports = {
           '--color-actions-disabled': '#EFF2F5',
 
           '--color-primary-fill': '#018765',
+          '--color-primary-fill-variant': '#33BA75',
           '--color-primary-fill-60': '#01876599',
           '--color-primary-mild': '#E6F3F0',
 

@@ -40,10 +40,6 @@ const RootLayout = () => {
       >
         <Stack.Screen name="(tabs)" />
 
-        <Stack.Screen name="transfer" />
-
-        <Stack.Screen name="confirm" />
-
         <Stack.Screen name="+not-found" />
       </Stack>
     </SafeAreaProvider>

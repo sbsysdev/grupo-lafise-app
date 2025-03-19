@@ -1,11 +1,20 @@
 /* native */
 import { View } from 'react-native';
+import { useRouter } from 'expo-router';
 /* components */
 import { Button, Icon, Label } from '@/shared/components';
 /* assets */
 import { mdiCellphone } from '@mdi/js';
 
 const ConfirmTransfer = () => {
+  const router = useRouter();
+
+  const handleSuccessTransfer = () => {
+    router.dismiss(1);
+
+    router.replace('/success');
+  };
+
   return (
     <View className="gap-12 flex-grow">
       <View className="gap-5 items-center">
@@ -47,7 +56,7 @@ const ConfirmTransfer = () => {
       </View>
 
       <View className="border-t border-disabled px-6 pb-6 pt-4">
-        <Button priority="primary" aspect="fill">
+        <Button priority="primary" aspect="fill" onPress={handleSuccessTransfer}>
           <Label priority="white" weight="bold" size="lg">
             Confirmar el envío
           </Label>

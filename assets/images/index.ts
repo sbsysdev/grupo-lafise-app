@@ -1,2 +1,9 @@
 export const headerBgImage = require('./header-bg.jpg');
 export const lafiseImage = require('./lafise.png');
+export const transparentHeaderBgImage = require('./transparent-header-bg.png');
+export const curveLeftImage = require('./curve-left.png');
+export const curveRightImage = require('./curve-right.png');
+export const rectangleTopLeftImage = require('./rectangle-top-left.png');
+export const rectangleTopRightImage = require('./rectangle-top-right.png');
+export const rectangleBottomLeftImage = require('./rectangle-bottom-left.png');
+export const rectangleBottomRightImage = require('./rectangle-bottom-right.png');
