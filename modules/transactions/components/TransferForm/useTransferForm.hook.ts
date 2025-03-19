@@ -1,4 +1,5 @@
 /* native */
+import { useRouter } from 'expo-router';
 import { useController, useForm } from 'react-hook-form';
 /* utils */
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -20,8 +21,12 @@ const useTransferForm = () => {
     resolver: zodResolver(transferFormValidation('NIO', 100, 7500)),
   });
 
+  const router = useRouter();
+
   const handleSubmitTransferForm = handleSubmit(data => {
     console.log(data);
+
+    router.push('/confirm');
   });
 
   const { field: accountField } = useController({ control, name: 'account' });
