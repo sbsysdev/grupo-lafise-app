@@ -1,11 +1,14 @@
 /* native */
 import { View } from 'react-native';
+import { useRouter } from 'expo-router';
 /* components */
 import { Button, Icon, Label } from '@/shared/components';
 /* assets */
 import { mdiCashFast, mdiCashRefund, mdiCellphone, mdiLightbulbOutline } from '@mdi/js';
 
 const QuickOperations = () => {
+  const router = useRouter();
+
   return (
     <View className="bg-white p-4 gap-2 rounded-xl shadow shadow-black">
       <Label size="xl" weight="semiBold">
@@ -14,7 +17,12 @@ const QuickOperations = () => {
 
       <View className="flex-row gap-6 justify-between">
         <View className="gap-1 items-center">
-          <Button className="w-16 h-16 justify-center" priority="primary" aspect="mild">
+          <Button
+            className="w-16 h-16 justify-center"
+            priority="primary"
+            aspect="mild"
+            onPress={() => router.push('/transfer')}
+          >
             <Icon path={mdiCashRefund} priority="primary" />
           </Button>
 

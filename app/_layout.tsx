@@ -31,7 +31,7 @@ const RootLayout = () => {
 
   return (
     <SafeAreaProvider>
-      <StatusBar style="auto" />
+      <StatusBar style="dark" />
 
       <Stack
         screenOptions={{
@@ -39,6 +39,9 @@ const RootLayout = () => {
         }}
       >
         <Stack.Screen name="(tabs)" />
+
+        <Stack.Screen name="transfer" />
+
         <Stack.Screen name="+not-found" />
       </Stack>
     </SafeAreaProvider>
