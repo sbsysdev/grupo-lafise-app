@@ -12,6 +12,8 @@ adb connect <ip_address>:<port>
 
 **Development**
 
+Modify `baseURL` property on [api.value.ts](./modules/transactions/values/api.value.ts) file
+
 ```
 npm start
 ```

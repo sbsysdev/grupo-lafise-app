@@ -1,16 +1,27 @@
 /* native */
 import { TabList, Tabs, TabSlot, TabTrigger } from 'expo-router/ui';
+/* stores */
+import { accountStore } from '@/modules/transactions/stores';
 /* components */
 import { Button, Icon, Label, TabButton } from '@/shared/components';
+/* utils */
+import { classNames } from '@/shared/utils';
 /* assets */
 import { mdiCreditCardOutline, mdiHomeOutline, mdiSwapHorizontal } from '@mdi/js';
 
 const TabsLayout = () => {
+  const userState = accountStore(state => state.userState);
+
   return (
     <Tabs className="bg-white">
       <TabSlot />
 
-      <TabList className="bg-white shadow-2xl shadow-black px-6 pb-4 flex-row items-center justify-between">
+      <TabList
+        className={classNames(
+          'bg-white shadow-2xl shadow-black px-6 pb-4 flex-row items-center justify-between',
+          userState !== 'loaded' && 'hidden'
+        )}
+      >
         <TabTrigger name="home" href="/" asChild>
           <TabButton>
             {({ isFocused, onPress }) => (

@@ -1,11 +1,15 @@
 /* native */
 import { View } from 'react-native';
+/* types */
+import { TransactionItem } from '../../types';
 /* components */
 import { Icon, Label } from '@/shared/components';
 /* assets */
 import { mdiArrowDown } from '@mdi/js';
 
-const TransactionListItem = () => {
+const TransactionListItem = ({ transaction }: { transaction: TransactionItem }) => {
+  const format = new Intl.NumberFormat('en-US', { style: 'decimal', minimumFractionDigits: 2 });
+
   return (
     <View className="py-3 gap-3 flex-row items-center border-b border-disabled">
       <View className="p-3 bg-primaryMild rounded-full">
@@ -13,15 +17,16 @@ const TransactionListItem = () => {
       </View>
 
       <View className="flex-grow">
-        <Label weight="bold">Pago quincenal</Label>
+        <Label weight="bold">{transaction.description}</Label>
 
         <Label priority="placeholder" weight="semiBold">
-          Banco
+          {transaction.bankDescription}
         </Label>
       </View>
 
       <Label priority="primary" weight="semiBold">
-        C$7,500.00
+        {transaction.amount.currency}
+        {format.format(transaction.amount.value)}
       </Label>
     </View>
   );

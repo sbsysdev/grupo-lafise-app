@@ -1,6 +1,9 @@
 /* native */
 import { StatusBar } from 'expo-status-bar';
-import { Image, ImageBackground, View } from 'react-native';
+import { useRouter } from 'expo-router';
+import { Image, ImageBackground, Pressable, View } from 'react-native';
+/* stores */
+import { accountStore } from '../../stores';
 /* components */
 import { Icon, Label } from '@/shared/components';
 /* assets */
@@ -8,6 +11,13 @@ import { headerBgImage, lafiseImage } from '@/assets/images';
 import { mdiEyeOffOutline, mdiSendOutline } from '@mdi/js';
 
 const UserHeader = () => {
+  const router = useRouter();
+
+  const user = accountStore(state => state.user);
+  const account = accountStore(state => state.mainAccount);
+
+  const format = new Intl.NumberFormat('en-US', { style: 'decimal', minimumFractionDigits: 2 });
+
   return (
     <ImageBackground className="h-[19rem]" source={headerBgImage} resizeMode="cover">
       <View className="flex-grow bg-primaryFill60 h-[19rem]">
@@ -19,14 +29,14 @@ const UserHeader = () => {
               <Image className="w-7 h-7" source={lafiseImage} />
 
               <Label priority="white" weight="medium">
-                Hola, Steven Bustillo
+                Hola, {user.fullName}
               </Label>
             </View>
 
             <Image
               className="rounded-full w-8 h-8"
               source={{
-                uri: 'https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png',
+                uri: user.profilePhoto,
               }}
             />
           </View>
@@ -43,13 +53,15 @@ const UserHeader = () => {
             <View className="flex-row gap-2 justify-between items-center">
               <View>
                 <Label priority="subtitle" weight="medium">
-                  Cuenta de ahorro
+                  {account.alias}
                 </Label>
 
-                <Label priority="muted">1134948394</Label>
+                <Label priority="muted">{account.accountNumber}</Label>
               </View>
 
-              <Icon className="-rotate-[30deg]" path={mdiSendOutline} priority="primary" />
+              <Pressable onPress={() => router.push('/transfer')}>
+                <Icon className="-rotate-[30deg]" path={mdiSendOutline} priority="primary" />
+              </Pressable>
             </View>
 
             <View className="gap-1">
@@ -59,11 +71,11 @@ const UserHeader = () => {
 
               <View className="flex-row gap-2 items-center">
                 <Label priority="subtitle" weight="medium">
-                  NIO
+                  {account.currency}
                 </Label>
 
                 <Label size="2xl" priority="subtitle" weight="semiBold">
-                  7,500.00
+                  {format.format(account.balance)}
                 </Label>
               </View>
             </View>
